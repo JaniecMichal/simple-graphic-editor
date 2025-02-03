@@ -14,11 +14,7 @@ export const ImageCanvas = () => {
 	}
 
 	return (
-		<div
-			id="image-canvas"
-			className="relative h-full w-full overflow-hidden"
-			onClick={() => setSelectedId(null)}
-		>
+		<div id="image-canvas" className="relative h-full w-full" onClick={() => setSelectedId(null)}>
 			{images.map((image) => (
 				<Rnd
 					key={image.id}
@@ -55,7 +51,7 @@ export const ImageCanvas = () => {
 						</>
 					)}
 
-					<img src={image.src} alt="Uploaded" className="h-full w-full object-contain" />
+					<img src={image.src} alt="Uploaded" className="h-full w-full" />
 				</Rnd>
 			))}
 		</div>

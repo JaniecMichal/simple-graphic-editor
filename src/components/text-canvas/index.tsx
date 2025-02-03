@@ -14,7 +14,7 @@ export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProp
 	const { texts, updateText, removeText } = useText();
 
 	return (
-		<div id="canvas" className="relative h-full w-full overflow-hidden">
+		<div id="canvas" className="relative h-full w-full">
 			{texts.map((text) => (
 				<Rnd
 					key={text.id}
