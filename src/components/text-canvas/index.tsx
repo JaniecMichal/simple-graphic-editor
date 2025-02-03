@@ -1,18 +1,18 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent } from "react";
 import { useText } from "@/context/text-context";
 import { Rnd } from "react-rnd";
 import { Move, Trash2 } from "lucide-react";
 
-export const TextCanvas = () => {
+interface TextCanvasProps {
+	selectedTextId: string | null;
+	setSelectedTextId: (id: string | null) => void;
+}
+
+export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProps) => {
 	const { texts, updateText, removeText } = useText();
-	const [selectedId, setSelectedId] = useState<string | null>(null);
 
 	return (
-		<div
-			id="canvas"
-			className="relative h-full w-full overflow-hidden"
-			onClick={() => setSelectedId(null)}
-		>
+		<div id="canvas" className="relative h-full w-full overflow-hidden">
 			{texts.map((text) => (
 				<Rnd
 					key={text.id}
@@ -24,21 +24,19 @@ export const TextCanvas = () => {
 						const newWidth = ref.offsetWidth;
 						const scaleFactor = newWidth / text.width;
 						const newFontSize = text.fontSize * scaleFactor;
-
-						updateText(selectedId || "default-id-text", {
-							width: newWidth,
-							fontSize: newFontSize,
-						});
+						updateText(text.id, { width: newWidth, fontSize: newFontSize });
 					}}
-					className={`relative border ${
-						selectedId === text.id ? "border-purple-500" : "border-transparent"
+					// Upewniamy się, że interaktywne elementy mają pointer-events: auto
+					className={`pointer-events-auto relative border ${
+						selectedTextId === text.id ? "border-purple-500" : "border-transparent"
 					}`}
 					onClick={(e: SyntheticEvent) => {
 						e.stopPropagation();
-						setSelectedId(text.id);
+						setSelectedTextId(text.id);
 					}}
+					style={{ zIndex: 20 }}
 				>
-					{selectedId === text.id && (
+					{selectedTextId === text.id && (
 						<>
 							<div className="absolute -left-4 -top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow">
 								<Move size={16} className="text-gray-600" />
@@ -59,18 +57,22 @@ export const TextCanvas = () => {
 					<p
 						contentEditable
 						suppressContentEditableWarning
-						onBlur={(e) => updateText(text.id, { content: e.currentTarget.innerText })}
+						onBlur={(e) =>
+							updateText(text.id, {
+								content: e.currentTarget.innerText,
+							})
+						}
 						className="text-center outline-none"
 						style={{
 							color: text.color,
 							fontSize: text.fontSize,
-							whiteSpace: "pre-wrap", // umożliwia zachowanie nowych linii
+							whiteSpace: "pre-wrap",
 						}}
 					>
 						{text.content}
 					</p>
 
-					{selectedId === text.id && (
+					{selectedTextId === text.id && (
 						<div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
 							{["#000", "#fff", "#f00", "#00f", "#0f0"].map((color) => (
 								<button
