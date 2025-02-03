@@ -8,9 +8,14 @@ import { SizePicker } from "../size-picker";
 interface TextCanvasProps {
 	selectedTextId: string | null;
 	setSelectedTextId: (id: string | null) => void;
+	hideControls: boolean;
 }
 
-export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProps) => {
+export const TextCanvas = ({
+	selectedTextId,
+	setSelectedTextId,
+	hideControls,
+}: TextCanvasProps) => {
 	const { texts, updateText, removeText } = useText();
 
 	return (
@@ -30,7 +35,7 @@ export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProp
 					}}
 					// Upewniamy się, że interaktywne elementy mają pointer-events: auto
 					className={`pointer-events-auto relative border ${
-						selectedTextId === text.id ? "border-purple-500" : "border-transparent"
+						!hideControls && selectedTextId === text.id ? "border-purple-500" : "border-transparent"
 					}`}
 					onClick={(e: SyntheticEvent) => {
 						e.stopPropagation();
@@ -38,7 +43,7 @@ export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProp
 					}}
 					style={{ zIndex: 20 }}
 				>
-					{selectedTextId === text.id && (
+					{!hideControls && selectedTextId === text.id && (
 						<>
 							<PositionPicker />
 							<RemoveElementButton
@@ -68,7 +73,7 @@ export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProp
 						{text.content}
 					</p>
 
-					{selectedTextId === text.id && (
+					{!hideControls && selectedTextId === text.id && (
 						<div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
 							{["#000", "#fff", "#f00", "#00f", "#0f0"].map((color) => (
 								<button

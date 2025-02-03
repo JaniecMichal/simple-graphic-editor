@@ -13,10 +13,18 @@ import {
 } from "@/components";
 
 export const GraphicEditor = () => {
+	const [selectedTextId, setSelectedTextId] = useState<string | null>(null);
+	const [isExporting, setIsExporting] = useState(false);
 	const { bgColor, setBgColor } = useBackground();
 	const { texts } = useText();
-	const [selectedTextId, setSelectedTextId] = useState<string | null>(null);
 	const { canvasRef, handleExport } = useExportPNG();
+
+	const onExport = async () => {
+		setSelectedTextId(null);
+		setIsExporting(true);
+		await handleExport();
+		setIsExporting(false);
+	};
 
 	return (
 		<div className="flex h-[900px] w-full justify-center gap-6">
@@ -27,12 +35,16 @@ export const GraphicEditor = () => {
 				onClick={() => setSelectedTextId(null)}
 			>
 				<div className="absolute inset-0 z-0">
-					<ImageCanvas />
+					<ImageCanvas hideControls={isExporting} />
 				</div>
 
 				{texts.length > 0 && (
 					<div className="pointer-events-none absolute inset-0 z-20">
-						<TextCanvas selectedTextId={selectedTextId} setSelectedTextId={setSelectedTextId} />
+						<TextCanvas
+							selectedTextId={selectedTextId}
+							setSelectedTextId={setSelectedTextId}
+							hideControls={isExporting}
+						/>
 					</div>
 				)}
 			</div>
@@ -48,7 +60,7 @@ export const GraphicEditor = () => {
 					<TextPicker />
 				</div>
 				<div className="mt-16 flex justify-end">
-					<Button onClick={handleExport}>Export do PNG</Button>
+					<Button onClick={onExport}>Export do PNG</Button>
 				</div>
 			</div>
 		</div>

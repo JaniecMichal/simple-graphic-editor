@@ -5,7 +5,7 @@ import { SizePicker } from "../size-picker";
 import { RemoveElementButton } from "../remove-element-button";
 import { PositionPicker } from "../position-picker";
 
-export const ImageCanvas = () => {
+export const ImageCanvas = ({ hideControls }: { hideControls: boolean }) => {
 	const { images, updateImage, removeImage } = useImage();
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -32,14 +32,14 @@ export const ImageCanvas = () => {
 					}}
 					style={{ zIndex: 0 }}
 					className={`relative border ${
-						selectedId === image.id ? "border-purple-500" : "border-transparent"
+						!hideControls && selectedId === image.id ? "border-purple-500" : "border-transparent"
 					}`}
 					onClick={(e: SyntheticEvent) => {
 						e.stopPropagation();
 						setSelectedId(image.id);
 					}}
 				>
-					{selectedId === image.id && (
+					{!hideControls && selectedId === image.id && (
 						<>
 							<PositionPicker />
 							<RemoveElementButton
