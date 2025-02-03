@@ -1,32 +1,22 @@
-import { LogoHeader } from "../../components/logo";
-import { useBackground } from "@/context/background-context";
-import { BackgroundColorPicker } from "../../components/background-picker";
-import { TextCanvas } from "../../components/text-canvas";
-import { TextPicker } from "../../components/text-picker";
-import { ImagePicker } from "../../components/image-picker";
-import { ImageCanvas } from "../../components/image-canvas";
+import { useState } from "react";
 import { useText } from "@/context/text-context";
-import { useRef, useState } from "react";
-import html2canvas from "html2canvas";
-import { Button } from "@/components/export-button";
+import { useBackground } from "@/context/background-context";
+import { useExportPNG } from "@/hooks/export-png";
+import {
+	LogoHeader,
+	BackgroundColorPicker,
+	TextCanvas,
+	TextPicker,
+	ImagePicker,
+	ImageCanvas,
+	Button,
+} from "@/components";
 
 export const GraphicEditor = () => {
 	const { bgColor, setBgColor } = useBackground();
 	const { texts } = useText();
 	const [selectedTextId, setSelectedTextId] = useState<string | null>(null);
-
-	const canvasRef = useRef<HTMLDivElement>(null);
-
-	const handleExport = () => {
-		if (canvasRef.current) {
-			html2canvas(canvasRef.current).then((canvas) => {
-				const link = document.createElement("a");
-				link.href = canvas.toDataURL("image/png");
-				link.download = "graphic.png";
-				link.click();
-			});
-		}
-	};
+	const { canvasRef, handleExport } = useExportPNG();
 
 	return (
 		<div className="flex h-[900px] w-full justify-center gap-6">
