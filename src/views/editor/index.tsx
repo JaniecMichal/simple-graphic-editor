@@ -1,10 +1,10 @@
-import { LogoHeader } from "../logo";
+import { LogoHeader } from "../../components/logo";
 import { useBackground } from "@/context/background-context";
-import { BackgroundColorPicker } from "../background-picker";
-import { TextCanvas } from "../text-canvas";
-import { TextPicker } from "../text-picker";
-import { ImagePicker } from "../image-picker";
-import { ImageCanvas } from "../image-canvas";
+import { BackgroundColorPicker } from "../../components/background-picker";
+import { TextCanvas } from "../../components/text-canvas";
+import { TextPicker } from "../../components/text-picker";
+import { ImagePicker } from "../../components/image-picker";
+import { ImageCanvas } from "../../components/image-canvas";
 import { useText } from "@/context/text-context";
 import { useState } from "react";
 

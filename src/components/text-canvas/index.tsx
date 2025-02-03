@@ -1,7 +1,9 @@
 import { SyntheticEvent } from "react";
 import { useText } from "@/context/text-context";
 import { Rnd } from "react-rnd";
-import { Move, Trash2 } from "lucide-react";
+import { PositionPicker } from "../position-picker";
+import { RemoveElementButton } from "../remove-element-button";
+import { SizePicker } from "../size-picker";
 
 interface TextCanvasProps {
 	selectedTextId: string | null;
@@ -38,19 +40,13 @@ export const TextCanvas = ({ selectedTextId, setSelectedTextId }: TextCanvasProp
 				>
 					{selectedTextId === text.id && (
 						<>
-							<div className="absolute -left-4 -top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow">
-								<Move size={16} className="text-gray-600" />
-							</div>
-							<button
-								className="absolute -right-4 -top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow"
-								onClick={(e) => {
-									e.stopPropagation();
+							<PositionPicker />
+							<RemoveElementButton
+								removeElement={() => {
 									removeText(text.id);
 								}}
-							>
-								<Trash2 size={16} className="text-red-600" />
-							</button>
-							<div className="absolute -bottom-2 -right-2 h-6 w-6 rounded-full bg-purple-500"></div>
+							/>
+							<SizePicker />
 						</>
 					)}
 

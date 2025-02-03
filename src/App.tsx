@@ -1,9 +1,9 @@
 import React from "react";
 
-import { GraphicEditor } from "./components/editor";
-import { BackgroundProvider } from "./context/background-context";
-import { TextProvider } from "./context/text-context";
-import { ImageProvider } from "./context/image-context";
+import { BackgroundProvider } from "@/context/background-context";
+import { TextProvider } from "@/context/text-context";
+import { ImageProvider } from "@/context/image-context";
+import { GraphicEditor } from "@/views/editor";
 
 function App() {
 	return (
