@@ -12,7 +12,7 @@ export const Button = ({
 	className,
 	...rest
 }: ButtonProps) => {
-	const baseClasses = "rounded-md px-4 py-2";
+	const baseClasses = "rounded-md px-8 py-2";
 	const primaryClasses = "bg-[#7209B7] text-white";
 	const secondaryClasses = "bg-transparent text-gray-800";
 
