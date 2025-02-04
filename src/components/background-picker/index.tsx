@@ -8,7 +8,7 @@ interface BackgroundColorPickerProps {
 
 export const BackgroundColorPicker = ({ bgColor, setBgColor }: BackgroundColorPickerProps) => {
 	return (
-		<ActionTile iconSrc={BgIcon} label="Background">
+		<ActionTile icon={<BgIcon />} label="Background">
 			<input
 				type="color"
 				value={bgColor}

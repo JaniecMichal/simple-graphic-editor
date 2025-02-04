@@ -1,14 +1,9 @@
-import BgIcon from "../../assets/logo.svg";
+import Logo from "@/assets/logo.svg";
 
 export const LogoHeader = () => {
 	return (
 		<div className="mb-4 flex items-center">
-			<img
-				src={BgIcon}
-				alt="Logo"
-				className="mr-2 h-8 w-8"
-				style={{ filter: "grayscale(100%)", color: "#7209B7" }}
-			/>
+			<Logo className="mr-2 h-8 w-8" style={{ fill: "#7209B7" }} />
 			<h1 className="text-xl font-bold text-gray-600">CanvasEditor</h1>
 		</div>
 	);

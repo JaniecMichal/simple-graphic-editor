@@ -6,5 +6,5 @@ import { ActionTile } from "../action-tile";
 export const TextPicker = () => {
 	const { addText } = useText();
 
-	return <ActionTile iconSrc={TextIcon} label="Text" onClick={addText} />;
+	return <ActionTile icon={<TextIcon />} label="Text" onClick={addText} />;
 };
