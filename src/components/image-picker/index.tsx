@@ -18,7 +18,7 @@ export const ImagePicker = () => {
 	return (
 		<>
 			<ActionTile
-				icon={<ImageIcon />}
+				icon={<ImageIcon className="h-16 w-16 sm:h-24 sm:w-24" />}
 				label="Image"
 				onClick={() => fileInputRef.current?.click()}
 			/>

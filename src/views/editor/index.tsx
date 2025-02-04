@@ -29,19 +29,18 @@ export const GraphicEditor = () => {
 	} = useEditor();
 
 	return (
-		<div className="flex h-[900px] w-full justify-center gap-6">
+		<div className="flex h-full w-full flex-col-reverse justify-center gap-6 p-4 md:flex-row">
 			<div
 				ref={canvasRef}
-				className="relative h-full w-1/2"
+				className="relative h-[400px] w-full md:h-[900px] md:w-1/2"
 				style={{ backgroundColor: bgColor }}
 				onClick={() => setSelectedTextId(null)}
 			>
 				<div className="absolute inset-0 z-0">
 					<ImageCanvas hideControls={isExporting} />
 				</div>
-
 				{texts.length > 0 && (
-					<div className="pointer-events-none absolute inset-0 z-20">
+					<div className="absolute inset-0 z-20">
 						<TextCanvas
 							selectedTextId={selectedTextId}
 							setSelectedTextId={setSelectedTextId}
@@ -51,15 +50,15 @@ export const GraphicEditor = () => {
 				)}
 			</div>
 
-			<div className="w-1/2 bg-white p-4 shadow-md">
-				<div className="flex items-center justify-between">
+			<div className="w-full bg-white p-4 shadow-md md:w-1/2">
+				<div className="flex flex-wrap items-center justify-between md:flex-nowrap">
 					<LogoHeader />
 					<ResetButton onClick={handleResetClick}>Reset</ResetButton>
 				</div>
 				<div className="my-4 w-full rounded-lg bg-gray-50 px-4 py-6">
 					<h2 className="text-lg font-bold text-gray-600">Add content</h2>
 				</div>
-				<div className="grid grid-cols-2 gap-4 pb-16">
+				<div className="md: grid grid-cols-1 gap-4 pb-16 md:grid-cols-2">
 					<BackgroundColorPicker bgColor={bgColor} setBgColor={setBgColor} />
 					<ImagePicker />
 					<TextPicker />
@@ -68,6 +67,7 @@ export const GraphicEditor = () => {
 					<Button onClick={onExport}>Export do PNG</Button>
 				</div>
 			</div>
+
 			{showResetModal && (
 				<ResetConfirmModal handleCancel={handleModalCancel} handleReset={handleModalReset} />
 			)}
