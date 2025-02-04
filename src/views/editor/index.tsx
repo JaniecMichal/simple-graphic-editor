@@ -7,8 +7,8 @@ import {
 	ImageCanvas,
 	Button,
 	ResetButton,
-	ResetConfirmModal,
 } from "@/components";
+import { ResetConfirmModal } from "@/components/reset-confirm-modal";
 
 import { useEditor } from "@/hooks/editor";
 
@@ -29,18 +29,19 @@ export const GraphicEditor = () => {
 	} = useEditor();
 
 	return (
-		<div className="flex h-full w-full flex-col-reverse justify-center gap-6 p-4 md:flex-row">
+		<div className="flex h-[900px] w-full justify-center gap-6">
 			<div
 				ref={canvasRef}
-				className="relative h-[400px] w-full md:h-[900px] md:w-1/2"
+				className="relative h-full w-1/2"
 				style={{ backgroundColor: bgColor }}
 				onClick={() => setSelectedTextId(null)}
 			>
 				<div className="absolute inset-0 z-0">
 					<ImageCanvas hideControls={isExporting} />
 				</div>
+
 				{texts.length > 0 && (
-					<div className="absolute inset-0 z-20">
+					<div className="pointer-events-none absolute inset-0 z-20">
 						<TextCanvas
 							selectedTextId={selectedTextId}
 							setSelectedTextId={setSelectedTextId}
@@ -50,8 +51,8 @@ export const GraphicEditor = () => {
 				)}
 			</div>
 
-			<div className="w-full bg-white p-4 shadow-md md:w-1/2">
-				<div className="flex flex-wrap items-center justify-between md:flex-nowrap">
+			<div className="w-1/2 bg-white p-4 shadow-md">
+				<div className="flex items-center justify-between">
 					<LogoHeader />
 					<ResetButton onClick={handleResetClick}>Reset</ResetButton>
 				</div>
@@ -67,7 +68,6 @@ export const GraphicEditor = () => {
 					<Button onClick={onExport}>Export do PNG</Button>
 				</div>
 			</div>
-
 			{showResetModal && (
 				<ResetConfirmModal handleCancel={handleModalCancel} handleReset={handleModalReset} />
 			)}
