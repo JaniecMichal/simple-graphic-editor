@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type TextItem = {
+export type TextItem = {
 	id: string;
 	x: number;
 	y: number;
@@ -15,6 +15,7 @@ type TextContextType = {
 	addText: () => void;
 	updateText: (id: string, updates: Partial<TextItem>) => void;
 	removeText: (id: string) => void;
+	clearTexts: () => void;
 };
 
 const TextContext = createContext<TextContextType | undefined>(undefined);
@@ -45,8 +46,12 @@ export const TextProvider = ({ children }: { children: ReactNode }) => {
 		setTexts((prev) => prev.filter((text) => text.id !== id));
 	};
 
+	const clearTexts = () => {
+		setTexts([]);
+	};
+
 	return (
-		<TextContext.Provider value={{ texts, addText, updateText, removeText }}>
+		<TextContext.Provider value={{ texts, addText, updateText, removeText, clearTexts }}>
 			{children}
 		</TextContext.Provider>
 	);

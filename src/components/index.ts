@@ -1,6 +1,6 @@
 export * from "./action-tile";
 export * from "./background-picker";
-export * from "./export-button";
+export * from "./button";
 export * from "./image-canvas";
 export * from "./image-picker";
 export * from "./logo";

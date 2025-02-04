@@ -33,7 +33,6 @@ export const TextCanvas = ({
 						const newFontSize = text.fontSize * scaleFactor;
 						updateText(text.id, { width: newWidth, fontSize: newFontSize });
 					}}
-					// Upewniamy się, że interaktywne elementy mają pointer-events: auto
 					className={`pointer-events-auto relative border ${
 						!hideControls && selectedTextId === text.id ? "border-purple-500" : "border-transparent"
 					}`}

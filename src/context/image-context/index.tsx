@@ -14,6 +14,7 @@ interface ImageContextType {
 	addImage: (file: File, initialPosition?: { x: number; y: number }) => void;
 	updateImage: (id: string, updates: Partial<ImageItem>) => void;
 	removeImage: (id: string) => void;
+	clearImages: () => void;
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
@@ -46,8 +47,12 @@ export const ImageProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 		setImages((prev) => prev.filter((img) => img.id !== id));
 	};
 
+	const clearImages = () => {
+		setImages([]);
+	};
+
 	return (
-		<ImageContext.Provider value={{ images, addImage, updateImage, removeImage }}>
+		<ImageContext.Provider value={{ images, addImage, updateImage, removeImage, clearImages }}>
 			{children}
 		</ImageContext.Provider>
 	);
