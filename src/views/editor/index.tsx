@@ -6,8 +6,9 @@ import {
 	ImagePicker,
 	ImageCanvas,
 	Button,
+	ResetButton,
+	ResetConfirmModal,
 } from "@/components";
-import { ResetConfirmModal } from "@/components/reset-confirm-modal";
 
 import { useEditor } from "@/hooks/editor";
 
@@ -53,7 +54,7 @@ export const GraphicEditor = () => {
 			<div className="w-1/2 bg-white p-4 shadow-md">
 				<div className="flex items-center justify-between">
 					<LogoHeader />
-					<Button onClick={handleResetClick}>Reset Canvas</Button>
+					<ResetButton onClick={handleResetClick}>Reset</ResetButton>
 				</div>
 				<div className="my-4 w-full rounded-lg bg-gray-50 px-4 py-6">
 					<h2 className="text-lg font-bold text-gray-600">Add content</h2>
